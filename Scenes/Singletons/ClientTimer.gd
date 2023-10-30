@@ -1,4 +1,5 @@
 extends Node
+var serverSettings = preload("res://ServerSettings.tres");
 
 var previousTick;
 var clientClock : float = 0;
@@ -15,7 +16,7 @@ func _ready():
 	
 func _physics_process(delta):
 	# Handle client tick signal
-	if Time.get_unix_time_from_system() - previousTick > GameConfigs.PhysicsTickRate && ticking:
+	if Time.get_unix_time_from_system() - previousTick > serverSettings.PhysicsTickRate && ticking:
 		previousTick = Time.get_unix_time_from_system();
 		onTick.emit();
 		

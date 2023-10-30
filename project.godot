@@ -18,7 +18,6 @@ config/features=PackedStringArray("4.1", "Forward Plus")
 
 Server="*res://Scenes/Singletons/Server.gd"
 ClientTimer="*res://Scenes/Singletons/ClientTimer.gd"
-GameConfigs="*res://GameConfigs.gd"
 Debug="*res://Scenes/Singletons/Debug.gd"
 
 [display]

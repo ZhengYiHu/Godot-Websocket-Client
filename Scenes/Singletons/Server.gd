@@ -1,7 +1,6 @@
 extends Node
 
 var serverSettings = preload("res://ServerSettings.tres");
-var cert = load("res://Certificate/X509_Certificate.crt")
 var peer = WebSocketMultiplayerPeer.new();
 var lastWorldState = 0;
 var worldStateBuffer = [];
@@ -16,6 +15,7 @@ var Connected: bool:
 @onready var sceneNode = gameNode.get_node("GameScene") if gameNode != null else null
 
 func _ready():
+	Connect();
 	if !Connected:
 		# Try to connect to the server every 5 seconds, if succeds, stop the timer
 		CreateTimer(5, Connect, multiplayer.connected_to_server);
@@ -28,7 +28,7 @@ func Connect():
 	
 	var error;
 	if !serverSettings.dev:
-		error = peer.create_client(serverSettings.ServerAddress, TLSOptions.client(cert));
+		error = peer.create_client(serverSettings.ServerAddress, TLSOptions.client(serverSettings.cert));
 	else:
 		error = peer.create_client(serverSettings.ServerAddress);
 	print("Connecting to " + serverSettings.ServerAddress);
