@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://by717txwuskst"]
+
+[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_awpmy"]
+[ext_resource type="Material" uid="uid://dbo88ntuxnn8m" path="res://Materials/White.tres" id="2_r85ds"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_klleq"]
+margin = 0.0
+radius = 1.29
+height = 3.17
+
+[sub_resource type="SphereMesh" id="SphereMesh_las76"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p57nc"]
+top_radius = 0.0
+bottom_radius = 0.35
+height = 0.7
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_awpmy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.20412e-11, 0, 0)
+shape = SubResource("CapsuleShape3D_klleq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_r85ds")
+mesh = SubResource("SphereMesh_las76")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.08165e-12, 2.08165e-12, 0.5)
+material_override = ExtResource("2_r85ds")
+mesh = SubResource("CylinderMesh_p57nc")

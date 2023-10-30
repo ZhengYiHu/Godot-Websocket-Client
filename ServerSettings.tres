@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ServerSettings" load_steps=2 format=3 uid="uid://djhv61lavifr6"]
+
+[ext_resource type="Script" path="res://ServerSettings.gd" id="1_c6cww"]
+
+[resource]
+script = ExtResource("1_c6cww")
+dev = true
+Address = "localhost"
+Port = 5511
+PhysicsTickRate = 0.05
+WorldStateOffset = 0.1
+DelayRequestTickRate = 0.5

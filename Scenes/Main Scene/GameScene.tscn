@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dufjknn812l45"]
+
+[ext_resource type="Script" path="res://Scenes/Main Scene/GameScene.gd" id="1_nknhj"]
+[ext_resource type="PackedScene" uid="uid://by717txwuskst" path="res://Scenes/Player/player.tscn" id="2_qb10b"]
+[ext_resource type="Material" uid="uid://4ucexmlxmij" path="res://Materials/Ground.tres" id="2_wcscm"]
+[ext_resource type="Script" path="res://Scenes/Main Scene/Camera.gd" id="7_n7xhs"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_103bk"]
+bottom_radius = 100.0
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xvjep"]
+margin = 0.0
+height = 1.0
+radius = 100.0
+
+[node name="GameScene" type="Node3D"]
+script = ExtResource("1_nknhj")
+
+[node name="Player" parent="." instance=ExtResource("2_qb10b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0319805, -0.0228872, 0.00735283)
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.48959, 0)
+
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+material_override = ExtResource("2_wcscm")
+mesh = SubResource("CylinderMesh_103bk")
+skeleton = NodePath("../..")
+
+[node name="GroundCollider" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("CylinderShape3D_xvjep")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, -6.64895e-16, 1.47403e-16, 1.47404e-16, 0.422618, 0.906308, -6.64895e-16, -0.906308, 0.422618, 2.08165e-12, 90, 43)
+fov = 7.0
+size = 14.731
+script = ExtResource("7_n7xhs")
+min_bounds = Vector2(-7, 35)
+max_bounds = Vector2(7, 48)

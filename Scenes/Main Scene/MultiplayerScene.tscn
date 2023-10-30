@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv1qpayntmkfl"]
+
+[ext_resource type="PackedScene" uid="uid://dufjknn812l45" path="res://Scenes/Main Scene/GameScene.tscn" id="2_wepym"]
+
+[node name="Game" type="Node"]
+
+[node name="GameScene" parent="." instance=ExtResource("2_wepym")]
+transform = Transform3D(0.999999, 0.000926543, -0.00104172, -0.00093193, 0.999986, -0.00519117, 0.00103691, 0.00519214, 0.999986, -0.0020256, -0.00768661, 0.0331144)
+
+[node name="DebugUI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Connected" type="Label" parent="DebugUI"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 26.0
+offset_right = 69.0
+offset_bottom = 52.0
+text = "Connected : "
+
+[node name="Delay" type="Label" parent="DebugUI"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 53.0
+offset_right = 125.0
+offset_bottom = 79.0
+text = "Delay: "
+
+[node name="BufferCount" type="Label" parent="DebugUI"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 79.0
+offset_right = 125.0
+offset_bottom = 105.0
+text = "Buffer Count: "
+
+[node name="CurrentTime" type="Label" parent="DebugUI"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 102.0
+offset_right = 125.0
+offset_bottom = 128.0
+text = "Current Time: "
+
+[node name="RenderedTime" type="Label" parent="DebugUI"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 128.0
+offset_right = 130.0
+offset_bottom = 154.0
+text = "Rendered Time: "
+
+[node name="ActualTime" type="Label" parent="DebugUI"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 152.0
+offset_right = 155.0
+offset_bottom = 178.0
+text = "Rendered Time: "
