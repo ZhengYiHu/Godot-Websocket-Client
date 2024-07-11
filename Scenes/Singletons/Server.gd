@@ -19,6 +19,9 @@ var Connected: bool:
 @onready var sceneNode = gameNode.get_node("GameScene") if gameNode != null else null
 
 func _ready():
+	multiplayer.connected_to_server.connect(ConnectedToServer)
+	multiplayer.server_disconnected.connect(DisconnectedFromServer)
+	multiplayer.connection_failed.connect(ConnectionFailed);
 	Connect();
 	if !Connected:
 		# Try to connect to the server every 5 seconds, if succeds, stop the timer
@@ -26,10 +29,6 @@ func _ready():
 
 ## Create the client peers and connect to the server address and port
 func Connect():
-	multiplayer.connected_to_server.connect(ConnectedToServer)
-	multiplayer.server_disconnected.connect(DisconnectedFromServer)
-	multiplayer.connection_failed.connect(ConnectionFailed);
-	
 	var error;
 	if serverSettings.use_ssl_certificate:
 		error = peer.create_client(serverSettings.ServerAddress, TLSOptions.client(serverSettings.cert));
