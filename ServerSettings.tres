@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_c6cww")
-dev = true
+use_ssl_certificate = false
 Address = "localhost"
 Port = 5511
-PhysicsTickRate = 0.05
 WorldStateOffset = 0.1
 DelayRequestTickRate = 0.5
+PhysicsTickRate = 0.05

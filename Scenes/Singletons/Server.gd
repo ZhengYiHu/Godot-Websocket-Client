@@ -1,6 +1,10 @@
 extends Node
 
 var serverSettings = preload("res://ServerSettings.tres");
+
+var AddressPortFormat = "%s:%s"
+var ServerAddress = AddressPortFormat %[serverSettings.Address,serverSettings.Port]
+
 var peer = WebSocketMultiplayerPeer.new();
 var lastWorldState = 0;
 var worldStateBuffer = [];
@@ -27,11 +31,11 @@ func Connect():
 	multiplayer.connection_failed.connect(ConnectionFailed);
 	
 	var error;
-	if !serverSettings.dev:
+	if serverSettings.use_ssl_certificate:
 		error = peer.create_client(serverSettings.ServerAddress, TLSOptions.client(serverSettings.cert));
 	else:
-		error = peer.create_client(serverSettings.ServerAddress);
-	print("Connecting to " + serverSettings.ServerAddress);
+		error = peer.create_client(ServerAddress);
+	print("Connecting to " + ServerAddress);
 	if error:
 		print("Error: "+ str(error));
 		return;
