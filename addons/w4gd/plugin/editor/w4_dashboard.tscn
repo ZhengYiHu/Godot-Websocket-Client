@@ -1,0 +1,187 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnjr7xvc73c3e"]
+
+[ext_resource type="Script" path="res://addons/w4gd/plugin/editor/w4_dashboard.gd" id="1_7w01k"]
+[ext_resource type="Script" path="res://addons/w4gd/plugin/editor/w4_editor_auth_helper.gd" id="2_omphg"]
+[ext_resource type="PackedScene" uid="uid://cn1q0mu6r3i2s" path="res://addons/w4gd/plugin/editor/w4_workspace_settings.tscn" id="3_2oou2"]
+[ext_resource type="PackedScene" uid="uid://urrb5ctn6svw" path="res://addons/w4gd/plugin/editor/w4_server_uploader.tscn" id="4_41mws"]
+[ext_resource type="PackedScene" uid="uid://bhurh6h2vlnb2" path="res://addons/w4gd/plugin/editor/w4_editor_database.tscn" id="4_d1kcc"]
+
+[node name="W4Dashboard" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_7w01k")
+
+[node name="W4AuthHelper" type="Node" parent="."]
+script = ExtResource("2_omphg")
+
+[node name="SplitContainer" type="SplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WorkspaceSettings" parent="SplitContainer" instance=ExtResource("3_2oou2")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Auth" type="Panel" parent="SplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="LoginScreen" type="CenterContainer" parent="SplitContainer/Auth"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="Vertical" type="VBoxContainer" parent="SplitContainer/Auth/LoginScreen"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Title" type="Label" parent="SplitContainer/Auth/LoginScreen/Vertical"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "W4 Cloud Admin Login"
+horizontal_alignment = 1
+
+[node name="TitleSubText" type="Label" parent="SplitContainer/Auth/LoginScreen/Vertical"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Login with your admin credentials to upload game servers builds and run database scripts."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Web" type="HBoxContainer" parent="SplitContainer/Auth/LoginScreen/Vertical"]
+layout_mode = 2
+alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="SplitContainer/Auth/LoginScreen/Vertical/Web"]
+layout_mode = 2
+text = "Visit the web dashboard for more"
+
+[node name="Label" type="Label" parent="SplitContainer/Auth/LoginScreen/Vertical"]
+layout_mode = 2
+
+[node name="EmailLabel" type="Label" parent="SplitContainer/Auth/LoginScreen/Vertical"]
+layout_mode = 2
+text = "Email"
+horizontal_alignment = 1
+
+[node name="EmailInput" type="LineEdit" parent="SplitContainer/Auth/LoginScreen/Vertical"]
+layout_mode = 2
+virtual_keyboard_type = 5
+
+[node name="PasswordLabel" type="Label" parent="SplitContainer/Auth/LoginScreen/Vertical"]
+layout_mode = 2
+text = "Password"
+horizontal_alignment = 1
+
+[node name="PasswordInput" type="LineEdit" parent="SplitContainer/Auth/LoginScreen/Vertical"]
+layout_mode = 2
+virtual_keyboard_type = 6
+secret = true
+
+[node name="ErrorLabel" type="Label" parent="SplitContainer/Auth/LoginScreen/Vertical"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="SplitContainer/Auth/LoginScreen/Vertical"]
+layout_mode = 2
+alignment = 1
+
+[node name="ActionButton" type="Button" parent="SplitContainer/Auth/LoginScreen/Vertical/Buttons"]
+layout_mode = 2
+text = "Login"
+
+[node name="Main" type="Panel" parent="SplitContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="MarginContainer" type="MarginContainer" parent="SplitContainer/Main"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="SplitContainer/Main/MarginContainer"]
+layout_mode = 2
+tabs_visible = false
+
+[node name="Home" type="MarginContainer" parent="SplitContainer/Main/MarginContainer/TabContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SplitContainer/Main/MarginContainer/TabContainer/Home"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Servers" parent="SplitContainer/Main/MarginContainer/TabContainer/Home/VBoxContainer" instance=ExtResource("4_41mws")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Database" parent="SplitContainer/Main/MarginContainer/TabContainer/Home/VBoxContainer" instance=ExtResource("4_d1kcc")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Logout" type="Button" parent="SplitContainer/Main/MarginContainer/TabContainer/Home/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Logout"
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+size = Vector2i(416, 287)
+popup_window = true
+dialog_autowrap = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ErrorDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ErrorMessage" type="Label" parent="ErrorDialog/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ERROR"
+
+[node name="ErrorDetails" type="TextEdit" parent="ErrorDialog/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Error details"
+editable = false
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="logged_in" from="W4AuthHelper" to="." method="_on_w_4_auth_helper_logged_in"]
+[connection signal="logged_out" from="W4AuthHelper" to="." method="_on_w_4_auth_helper_logged_out"]
+[connection signal="login_error" from="W4AuthHelper" to="." method="_set_login_message"]
+[connection signal="workspace_settings_changed" from="SplitContainer/WorkspaceSettings" to="." method="_on_workspace_settings_workspace_settings_changed"]
+[connection signal="text_submitted" from="SplitContainer/Auth/LoginScreen/Vertical/EmailInput" to="." method="_on_login_input_submitted"]
+[connection signal="text_submitted" from="SplitContainer/Auth/LoginScreen/Vertical/PasswordInput" to="." method="_on_login_input_submitted"]
+[connection signal="pressed" from="SplitContainer/Auth/LoginScreen/Vertical/Buttons/ActionButton" to="." method="_on_login_input_submitted"]
+[connection signal="pressed" from="SplitContainer/Main/MarginContainer/TabContainer/Home/VBoxContainer/Logout" to="." method="_on_logout_pressed"]
